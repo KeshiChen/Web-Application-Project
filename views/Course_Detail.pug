@@ -1,0 +1,859 @@
+doctype html
+//if IE 7
+  html.no-js.ie7.oldie(lang="en-US")  
+//if IE 8
+  html.no-js.ie8.oldie(lang="en-US")  
+// [if gt IE 8] <!
+html(lang="zxx")
+  head
+    style(type="text/css")
+      | .modal-body{
+      | height: 400px;
+      | overflow-y: auto;
+      | }
+    // TITLE OF SITE
+    title DataDemy -group 7
+    // Meta
+    meta(charset="utf-8")
+    |
+    script(src="/bower_components/jquery/dist/jquery.js") 
+    |        
+    meta(name="description", content="app landing page template")
+    |         
+    meta(name="keywords", content="app, landing page, bootstrap")
+    |         
+    meta(name="developer", content="")
+    |         
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1")
+    // FAV AND ICONS
+    link(rel="icon", href="//assets/images/favicon.png", sizes="32x32")
+    |         
+    link(rel="icon", href="/assets/images/apple-icon-192.png", sizes="192x192")
+    |         
+    link(rel="apple-touch-icon-precomposed", href="/assets/images/apple-icon-180.png")
+    // GOOGLE FONTS
+    link(href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,700%7cVarela+Round", rel="stylesheet")
+    // FONT ICONS
+    link(rel="stylesheet", href="/assets/icons/font-awesome-4.7.0/css/font-awesome.min.css")
+    // Custom Icon Font
+    link(rel="stylesheet", href="/assets/font/flaticon.css")
+    // Bootstrap
+    link(rel="stylesheet", href="/assets/plugins/css/bootstrap_course.min.css")
+    // Animation
+    link(rel="stylesheet", href="/assets/plugins/css/animate.css")
+    |         
+    link(rel="stylesheet", href="/assets/plugins/css/course-review.css")
+    // owl
+    link(rel="stylesheet", href="/assets/plugins/css/owl.css")
+    // selectize
+    link(rel="stylesheet", href="/assets/plugins/css/selectize.css")
+    |         
+    link(rel="stylesheet", href="/assets/plugins/css//selectize.bootstrap3.css")
+    // Fancybox
+    link(rel="stylesheet", href="/assets/plugins/css/jquery.fancybox.min.css")
+    // dropdown
+    link(rel="stylesheet", href="/assets/plugins/css/bootstrap-dropdownhover.min.css")
+    // mobile nav
+    link(rel="stylesheet", href="/assets/plugins/css/meanmenu.css")
+    // COUSTOM CSS link
+    link(rel="stylesheet", href="/assets/less/style_community.css")
+    |         
+    link(rel="stylesheet", href="/assets/less/responsive.css")
+    link(rel="stylesheet", href="/css/sidebar.css")
+    link(rel='stylesheet', href='/css/BootSideMenu.css')
+    link(href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet")
+    //if lt IE 9
+      | [if lt IE 9]
+      script(src="js/plagin-js/html5shiv.js")
+      |             
+      script(src="js/plagin-js/respond.min.js")
+      |          [endif]
+  |     
+  body.subpage
+    - var allPages= data.pages
+    - var courseLength = allPages.length
+    - var index=0
+    - var allArticles = data.articles
+    - var articlesCount = allArticles.length
+    - var progress= (1/courseLength*100).toFixed(2)
+    - var coursename = allPages[0]["coursename"]
+    if user
+      each prog in user["progress"]
+        if prog.coursename === coursename
+          - index= prog.pageindex-1
+          - progress= ((index+1)/courseLength*100).toFixed(2)
+    //
+      |========================
+      |  HEADER
+      |========================
+    header.xt-header
+    .xt-header-top
+      .container
+        .row
+          .col-sm-6.uv-header-contact
+            a(href="")
+              i.fa.fa-phone
+              | (519) - 875 - 9822
+            |
+            a(href="")
+              i.fa.fa-envelope-o
+              | info@DataDemy.edu
+          |
+          .col-sm-6.uv-header-user
+            if user
+              a.nav-link(href='/profile/'+user.username)= user.username 
+                
+              a.nav-link(href='/logout') &nbsp; Logout
+            else 
+              
+              a(href="/login")
+                i.fa.fa-lock
+                | login/register
+              |
+              |
+    |
+    .clearfix
+    |
+    .xt-main-nav
+      nav.navbar.nav-scroll.home-1
+        .container
+          .row
+            .col-sm-4
+              .uv-logo
+                h5 DataDemy            
+            .col-sm-8.pull-right
+              .navbar-header
+                button.navbar-toggle.collapsed(type="button", data-toggle="collapse", data-action="#js-navbar-menu", aria-expanded="false")
+                  span.icon(aria-hidden="true")
+              |
+              #js-navbar-menu.collapse.navbar-collapse
+                ul#navbar-nav.nav.navbar-nav.ep-mobile-menu
+                  li
+                    a(href="/") Home
+                  |
+                  li
+                    a(href="/courses") Course
+                  if user
+                    li
+                      a(href="/profile/"+user.username) Profile
+                  li
+                    a(href='/community_home') Community
+                  li
+                    a(href="/datasets_firstpage") Datasets
+
+
+        // /.navbar
+      // Mobile Menu
+      //- .menu-spacing.visible-xs.nav-scroll
+        //- .mobile-menu-area.visible-xs.visible-sm
+        //-   .mobile-menu
+        //-     nav#mobile-menu-active
+        //-       ul.main
+        //-         li.active
+        //-           a.main-a(href="/") Home
+        //-           |                                     
+        //-           ul
+        //-             li
+        //-               a(href="index-1.html") Home 1
+        //-         |                                 
+        //-         li
+        //-           a.main-a(href="") Courses
+        //-           |                                     
+        //-           ul
+        //-             li
+        //-               a(href="course-listing.html") Course List
+        //-             |                                         
+        //-             li
+        //-               a(href="course-details.html") Single Course
+        //-             |                                         
+        //-             li
+        //-               a(href="course-details-2.html") Single Course 2
+        //-             |                                         
+        //-             li
+        //-               a(href="course-archive.html") Course Archive
+        //-             |                                         
+        //-             li
+        //-               a(href="course-quiz.html") Course Quiz
+        //-         |                                 
+        //-         li
+        //-           a.main-a(href="") Features
+        //-           |                                     
+        //-           ul
+        //-             li
+        //-               a(href="not-found.html") 404
+        //-             |                                         
+        //-             li
+        //-               a(href="/login") Login & Registration
+        //-             |                                         
+        //-             li
+        //-               a(href="teacher-details.html") Team Details
+        //-             |                                         
+        //-             li
+        //-               a(href="classes.html") Classes
+        //-             |                                         
+        //-             li
+        //-               a(href="about.html") About
+        //-             |                                         
+        //-             li
+        //-               a(href="services.html") Service
+        //-         |                                 
+        //-         li
+        //-           a.main-a(href="") Profile
+        //-           |                                     
+        //-           ul
+        //-             li
+        //-               a(href="dashboard-my-profile.html") Profile
+        //-             |                                         
+        //-             li
+        //-               a(href="dashboard-classes.html") Classes
+        //-             |                                         
+        //-             li
+        //-               a(href="dashboard-courses.html") Courses
+        //-             |                                         
+        //-             li
+        //-               a(href="dashboard-fav-courses.html") Favorite Course
+        //-             |                                         
+        //-             li
+        //-               a(href="dashboard-privacy-setting.html") Privacy Setting
+        //-             |                                         
+        //-             li
+        //-               a(href="dashboard-profile-setting.html") Profile Setting
+        //-         |                                 
+        //-         li
+        //-           a.main-a(href="") Community
+        //-           |                                     
+        //-           ul
+        //-             li
+        //-               a(href="blog.html") Community Page
+        //-             |                                         
+        //-             li
+        //-               a(href="blog-single.html") Community Single
+        //-         |                                 
+        //-         li
+        //-           a.main-a(href="contact.html") Contact
+    //
+      |========================
+      |      Features Section
+      |========================
+    .uv-pagination
+      .container
+        ul
+          li
+            a(href="/courses") Home
+          |                     
+          li
+            a(href="/courses") Courses
+          |                     
+          li.active
+            a(href="") #{coursename}
+    |         
+    |         
+    .uv-single-contest.uv-course-details
+      .container
+        .educationpress-main-content-inner.row
+          .uv-single-contest.uv-course-details
+            .container
+              .educationpress-main-content-inner.row
+                #primary.content-area.uv-course-listing-inner.col-md-8.col-sm-12
+                  .course-description.col-md-12
+                    //- small
+                    //-   | Quiz for : 
+                    //-   span
+                    //-     a(href="course-single.html") Learning Quality Graphic Design & Mockup and Business Card
+                    //- |                             
+                    //- small
+                    //-   | Quiz Status: 
+                    //-   span Not Finished
+                    |                             
+                    //- h3.course-title #{allPages[index]['title']}
+                    //- |    
+                    .row                         
+                      .quiz-wrapper.col-md-9
+                        .row
+                          div(class="progress col-9")
+                            div(class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow=progress aria-valuemin="0" aria-valuemax="100" style="width:"+progress+"%")
+                              span #{progress}% complete
+                          br
+                          button.btn.i.fa.fa-bars(type="button", data-toggle="modal", data-target="#exampleModalLong",style="float: right;") &nbsp;Lesson List
+                          h4(id="title")=allPages[index]['title']
+                          | 
+                          br
+                          div(class="lessons")
+                           div(id="content")                               
+                             p!=allPages[index]['content']   
+                           br
+                           img.image(id="pic" src=allPages[index]['image'] alt="" height=300 class="center")                         
+                          br
+                          br                            
+                        .row
+                          div(id= "div_butt" )
+                            .col-md-6
+                              a.prev.btn-primary.btn.btn-border.btn-block(onclick="prev()") Prev 
+                            |                                     
+                            .col-md-6
+                              a.next.btn-primary.btn.btn-fill.btn-block(onclick="next()") Next
+                                     
+                        .row
+                          div(class='col-2')
+                          div(class='comments table-responsive col-9')
+                            h3 Comments
+                            form(method='/get', action="/coursecomment")
+                              input(id='coursename', hidden, name='coursename',  value=coursename)
+                              input(id='coursepage', hidden, name='coursepage',  value=0)
+                              input.btn.btn-primary(type="submit", value="Help!")
+                            br
+                            table.table
+                              thead
+                                tr
+                                  th(hidden) page
+                                  th Title
+                                  th Author
+                                  th Time
+                aside.uv-sidebar.col-sm-12.col-md-4
+                   if user 
+                    .uv-widget
+                     .uv-student-avatar
+                        
+                        figure(align="center")
+                           
+                           img(src=user.portrait, alt="")
+                        |                            
+                        .uv-student-info
+                         h5 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{user.username}
+                        |                             
+                        .uv-student-infor-inner
+                         
+                         .div
+                          h9 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Email  :  #{user.email} 
+                         .div                             
+                          h9 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Reward Point : 
+                          h9.dynamicNum #{user.rewardpoints*100}
+                         |
+                         br
+                         a(href="/articles/userartic") &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; My Post &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         a(href="http://localhost:5000/articles/new") Add Posts 
+                         br
+                         .div
+                           
+                           .input-group
+                           button.btn.btn-link(type="button", data-toggle="modal", data-target="#exampleModal", data-whatever="@mdo") Upload &nbsp;&nbsp;
+                           a(href='/profile_datasets/'+user.username) My Datasets  
+
+                           // Modal
+                           #exampleModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+                             .modal-dialog(role="document")
+                               .modal-content
+                                 .modal-header
+                                   h7#exampleModalLabel.modal-title New Dataset
+                                   |
+                                   button.close(type="button", data-dismiss="modal", aria-label="Close")
+                                     span(aria-hidden="true") ×
+                                 |
+                                 .modal-body
+                                   if user
+                                    form(action="/datasets_firstpage/upload/"+user._id,method="post", enctype="multipart/form-data")
+                                         .form-group
+                                           label.col-form-label(for="recipient-name") Title:
+                                           |
+                                           input#recipient-name.form-control(name = "Title",type="text")
+                                         |
+                                         .form-group
+                                           label.col-form-label(for = "message-text") Description:
+                                           |
+
+
+
+                                           textarea#message-text.form-control(name = "Description")
+                                         |
+                                         .form-group
+                                           .input-group.mb-3
+                                             |
+                                             input(type="file", name="dataset_upload",id="dataset_upload",multiple="multiple")
+
+                                         |
+                                         button.btn.btn-primary(type="submit") Submit
+                                   else
+                                      a.btn.btn-link(href="http://localhost:5000/login") Please Login
+                //- div.col-md-3.sidenav
+                //- 
+                //-   ul.nav.nav-pills.list-inline
+                //-     li
+                //-       a(href='#reward' class="btn btn-info btn-sm" data-toggle="collapse") 
+                //-         <span class="glyphicon glyphicon-stats"></span>Stats
+                //-       div.collapse#reward
+                //-         p aaaaaaa
+                //-         br
+                //-         p aaaasssd
+                //-     li
+                //-       a(href='#catalogue' class="btn btn-info btn-sm" data-toggle="collapse") 
+                //-         <span class="glyphicon glyphicon-list-alt"></span>Catalogue
+                //-       div.collapse#catalogue
+                //-         ul.list-group 
+                //-          each course, i in allPages
+                //-           li.list-group-item
+                //-            button(type="button" onclick="jump("+i+")" class="btn btn-link btn-sm" style="white-space:normal; text-align:left" )= course.index + "." + course.title
+        //
+          |========================
+          |      Lesson List (can jump among pages)
+          |========================
+        #exampleModalLong.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLongTitle", aria-hidden="true")
+          .modal-dialog(role="document")
+            .modal-content 
+              .modal-header 
+                button.close(type="button", data-dismiss="modal", aria-label="Close")
+                  span(aria-hidden="true") ×
+              
+              .modal-body
+                each course, i in allPages
+                
+                  button(type="button" onclick="jump("+i+")" class="btn btn-link btn-sm" style="white-space:normal; text-align:left" )= course.index + "." + course.title
+    //
+      |========================
+      |      Script
+      |========================
+    script.
+      // Course page controller
+      var local_index = #{index}; // Current page index 
+      var check_point = #{index}; // The latest progress by page index
+      var courseLength = #{courseLength}; // Total number of pages
+      var progressbar = {};
+      var x = !{JSON.stringify(allPages)}; // Data of all pages of the course
+      var articles = !{JSON.stringify(allArticles)}; // Data of all comments of the course
+      var articlesCount = #{articlesCount}; //Total number of comments
+      var sizeOfSinglePage = 10; // how many comments are displayed for each page
+      var userinfo = !{JSON.stringify(user)}; // User information
+      var current_reward = 0; // Current reward points of the user
+      
+      // If user login, get reward points
+      if(userinfo) 
+        current_reward = userinfo.rewardpoints;
+        
+      // Update user's progress on this course to the server through Ajax
+      var updateProgress = function(userid, coursename, pageindex, progress){
+          var data = {
+            coursename:coursename,
+            pageindex:pageindex,
+            progress:progress
+          };
+          $.ajax({  
+              url: '/progress/'+ userid,  
+              type: 'PUT',  
+              dataType: 'json',  
+              data: data,  
+              success: function (data, textStatus, xhr) {  
+                  console.log(data);  
+              },  
+              error: function (xhr, textStatus, errorThrown) {  
+                  console.log('Error in Operation');  
+              }  
+          });  
+      };
+      
+      // Controls the animation of gaining reward
+      var animateReward = function(old_reward, new_reward){
+        $('.dynamicNum').animatingNumber({
+            from: old_reward*100,
+            to: new_reward*100,
+            duration: 1000
+        });
+      };
+      
+      // Update user's reward points to the server through Ajax
+      var updateReward = function(userid, reward){
+        var data = {
+          rewardpoints: reward
+        };
+        $.ajax({  
+            url: '/reward/'+ userid,  
+            type: 'PUT',  
+            dataType: 'json',  
+            data: data,  
+            success: function (data, textStatus, xhr) { 
+                animateReward(current_reward, data.rewardpoints);
+                current_reward = data.rewardpoints;
+                console.log(data);  
+            },  
+            error: function (xhr, textStatus, errorThrown) {  
+                console.log('Error in Operation');  
+            }  
+        });
+      };
+      
+      // Check if the answer of MCQ quiz is correct
+      // If correct, prompt the success message and show the 'Next' button
+      // Otherwise, prompt the failure message and the solution
+      var check_answer=function(){
+        console.log('check')
+
+        if (document.getElementById(x[local_index]["mcq"]["solution"]).checked) {
+          if(userinfo&&local_index>check_point){
+            updateReward(userinfo._id, x[local_index]["mcq"]["reward"]);
+          }
+          $("#check-result").hide();
+          $("#check-result").show();
+          $("#check-result").attr("style", "display:none;text-transform:capitalize;text-align:right;padding:8px 30px;font-size:16px;font-weight:600;line-height:26px;display:inline;background:#98bf21;height:45.6px;width:0px;position:absolute;left:0;z-index: -1;border-radius:50px;");
+          $("#check-result").text("Correct! Score + "+ (x[local_index]["mcq"]["reward"]*100));
+          $("#check-result").animate({width:"800px"});
+          console.log("local "+local_index);
+          console.log("length "+(#{courseLength}-1));
+          if(local_index<(#{courseLength}-1)){
+            makeNextButton();
+            //next();
+          }else{
+            console.log("won");
+            $("#check-result").text("Correct! Score + "+(x[local_index]["mcq"]["reward"]*100)+" Congratulations! You have won!");
+            //jump(0);
+          }
+        } else {
+          $("#check-result").hide();
+          $("#check-result").show();
+          $("#check-result").attr("style", "display:none;text-transform:capitalize;text-align:right;padding:8px 30px;font-size:16px;font-weight:600;line-height:26px;display:inline;background: #ffd3d1;height:45.6px;width:0px;position:absolute;left:0;z-index: -1;border-radius:50px;");
+          $("#check-result").text("Wrong Answer, please try again! Correct answer: "+x[local_index]["mcq"]["solution"]);
+          $("#check-result").animate({width:"100%"});
+          //alert("Wrong Answer, please try again!");
+        }
+        return false
+      };
+      
+      // Check if the answer of fillblank quiz is correct
+      // If correct, prompt the success message and show the 'Next' button
+      // Otherwise, prompt the failure message and the solution
+      var check_answer_fill=function(answer){
+        console.log('check')
+
+        if (document.getElementById("txt_box").value == answer) {
+          if(userinfo){
+            updateReward(userinfo._id, x[local_index]["mcq"]["reward"]);
+          }
+          $("#check-result").hide();
+          $("#check-result").show();
+          $("#check-result").attr("style", "display:none;text-transform:capitalize;text-align:right;padding:8px 30px;font-size:16px;font-weight:600;line-height:26px;display:inline;background:#98bf21;height:45.6px;width:0px;position:absolute;left:0;z-index: -1;border-radius:50px;");
+          $("#check-result").text("Correct! Score + "+ (x[local_index]["mcq"]["reward"]*100));
+          $("#check-result").animate({width:"800px"});
+          if(local_index<courseLength-1){
+            makeNextButton();
+            //next();
+          }else{
+            console.log("won");
+            $("#check-result").text("Correct! Score + "+(x[local_index]["mcq"]["reward"]*100)+" Congratulations! You have won!");
+            //jump(0);
+          }
+        } else {
+          $("#check-result").hide();
+          $("#check-result").show();
+          $("#check-result").attr("style", "display:none;text-transform:capitalize;text-align:right;padding:8px 30px;font-size:16px;font-weight:600;line-height:26px;display:inline;background: #ffd3d1;height:45.6px;width:0px;position:absolute;left:0;z-index: -1;border-radius:50px;");
+          $("#check-result").text("Wrong Answer, please try again! Correct answer: "+answer);
+          $("#check-result").animate({width:"100%"});
+          //alert("Wrong Answer, please try again!");
+        }
+        return false;
+      };
+      
+      // Filter out comments to only show those about the current page
+      var filterCommentsByPage = function(page_num) {
+        $(".coursepage").each(function(){
+          if($(this).hasClass("coursepage-"+page_num)){
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      };
+      
+      // Create "comments" element to the course
+      var makeComments = function() {
+        var comm_count = 0;
+        var comments_list = $("<tbody></tbody>");
+        for(var i=0;i<articlesCount;i++){
+            var comment = $("<tr></tr>");
+            var td_title = $("<td></td>");
+            var td_author = $("<td></td>");
+            var td_time = $("<td></td>");
+            var title = $("<a></a>");
+            title.attr("href", "/articles/"+ articles[i]._id);
+            title.css("font-size, 20px");
+            title.css("color, #000000;");
+            title.text(articles[i].title); 
+            var author = articles[i].author;
+            var time = articles[i].time;
+            td_title.append(title);
+            td_author.append(author);
+            td_time.append(time);
+            comment.append(td_title, td_author, td_time);
+            comment.addClass("coursepage");
+            comment.addClass("coursepage-"+(articles[i].coursepage - 1));
+            comments_list.append(comment);
+        }
+        return comments_list;
+      };
+      
+      // Create radio button for MCQ quizes
+      var makeRadioButton = function(name, value, text) {
+          var labelbreak= document.createElement("p");
+          var label = document.createElement("label");
+          var radio = document.createElement("input");
+          radio.type = "radio";
+          radio.name = name;
+          radio.value = value;
+          radio.id= value;
+          
+          label.appendChild(radio);
+
+          label.appendChild(document.createTextNode(text));
+          labelbreak.appendChild(label);
+          return labelbreak;
+      };
+      
+      // Create text input area for fillblank quizes 
+      var makeBlank = function(question) {
+          var labelbreak_q= document.createElement("p");
+          var labelbreak_v= document.createElement("p");
+
+          var q = document.createTextNode(question);
+          labelbreak_q.appendChild(q);
+          var value = document.createElement("input");
+          value.setAttribute("id", "txt_box");
+          labelbreak_v.appendChild(value);
+          console.log(labelbreak_q);
+          console.log(labelbreak_v);
+          return {question: labelbreak_q, value: labelbreak_v};
+      };
+      
+      // Hide "Prev" button and show "Next" button 
+      var makeNextButton = function(){
+          $(".prev").hide();
+          $(".next").show();
+      };
+
+      // Hide "Next" button and show "Prev" button
+      var makePrevButton = function(){
+          console.log("hahahahaha");
+          $(".next").hide();
+          $(".prev").show();
+
+      }
+      
+      // Show "Prev" button and show "Next" button
+      var makePrevNextButton = function(){
+          $(".next").show();
+          $(".prev").show();
+      }
+      
+      // Hide all pagination buttons
+      var hidePageButton = function(){
+          $(".next").hide();
+          $(".prev").hide();
+      }
+      
+      // Process logics after page changing
+      var redex= function(){
+        //document.getElementById("div_butt").innerHTML=""
+        if (local_index+1 >= x.length){
+          console.log("sddssd");
+          makePrevButton();
+        } else if (local_index==0){
+          console.log("sdsadsd");
+          makeNextButton();
+
+        } else {
+          console.log("s");
+          makePrevNextButton();
+          //makeNextButton();
+        }
+        if(x[local_index]['pagetype']=='MCQ'||x[local_index]['pagetype']=='fillBlank'){
+          $('.next').hide();
+        }
+      }
+      
+      // Process logics before page changing
+      var rendering = function(index, ptype) {
+        // Do when page change
+        var idx = index;
+        console.log(ptype);
+        document.getElementById("title").innerHTML = x[index]['title'];
+        document.getElementById("content").innerHTML = "";
+        document.getElementById("pic").src = "";
+        filterCommentsByPage(idx);
+        $("#coursepage").val(idx+1);
+        if (ptype == "MCQ"){
+
+          var options=  x[index]['mcq']['options']
+          var optionslist= options.split(',')
+          document.createElement("FORM")
+
+          my_form=document.createElement('FORM');
+          my_form.onsubmit= function(e){check_answer(); e.preventDefault();}
+          makePrevButton();
+          for (var i=0; i< optionslist.length; i++){
+              var radio_button = makeRadioButton("mcq", optionslist[i], optionslist[i]);
+              my_form.appendChild(radio_button);
+          }
+            
+          submit_button= document.createElement("BUTTON");
+          submit_button.type='SUBMIT'
+          submit_button.className="btn btn-info btn-sm"
+          submit_button.appendChild(document.createTextNode("CHECK"));
+          check_result = document.createElement("span");
+          check_result.id="check-result";
+          my_form.appendChild(submit_button);
+          my_form.appendChild(check_result);
+
+          document.getElementById("content").appendChild(my_form); 
+        }
+        else if (ptype== "lecture"){
+             document.getElementById("content").innerHTML = x[index]['content'];
+             if (x[index]['image']){
+                document.getElementById("pic").src = x[index]['image'];
+             }
+            
+        }
+        else if (ptype=="fillBlank"){
+            console.log('fiii option')
+            makePrevButton();
+            my_form=document.createElement('FORM');
+            console.log(x[index]['mcq']['solution'])
+            my_form.onsubmit= function(e){check_answer_fill(x[index]['mcq']['solution']); e.preventDefault();}
+            var question, value;
+            q_v = makeBlank(x[index]['mcq']['question']);
+            question = q_v.question;
+            value = q_v.value;
+            console.log("question "+question);
+            console.log("value "+value);
+            //question = document.createTextNode(x[index]['mcq']['question']);
+            
+            //value = document.createElement("input");
+            //value.setAttribute("id", "txt_box");
+
+            my_form.appendChild(question);
+            my_form.appendChild(value);
+            
+            submit_button= document.createElement("BUTTON");
+            submit_button.type='SUBMIT'
+            submit_button.className="btn btn-info btn-sm"
+            submit_button.appendChild(document.createTextNode("CHECK"));
+            check_result = document.createElement("span");
+            check_result.id="check-result";
+            my_form.appendChild(submit_button);
+            my_form.appendChild(check_result);
+            document.getElementById("content").appendChild(my_form); 
+        }
+        else{
+            document.getElementById("content").innerHTML = x[index]['content'];
+        }
+    
+      }
+      
+      // Process logics on clicking Prev button
+      var prev = function(){
+        if (local_index-1 < 0){
+          alert('finish!')
+          return
+        }
+        local_index-=1;
+        ptype= x[local_index]['pagetype'];
+        rendering(local_index, ptype)
+        redex()
+      }
+      
+      // Process logics on clicking Next button
+      var next = function() {
+        console.log("index "+local_index)
+        if (local_index+1 > x.length){
+          alert('finish!')
+          return
+        } else {
+          local_index+=1;
+          if(local_index > check_point){
+            if(userinfo){
+              userid = userinfo._id;
+              console.log("userid "+userid);
+              var progress = (((local_index+1)/#{courseLength})*100).toFixed(2);
+              updateProgress(userid, !{JSON.stringify(coursename)}, local_index+1, progress);
+            }
+          }
+        }
+        var ptype= x[local_index]['pagetype'];
+        rendering(local_index, ptype)
+        redex()
+      }
+      
+      // Process logics on page jumping
+      var jump= function(i){
+        local_index=i
+        ptype= x[i]['pagetype'];
+        rendering(local_index, ptype)
+        redex()
+      }
+      
+      // Process logics after page loaded
+      $(function(){
+        console.log("ssssss");
+        
+        $('#demo').BootSideMenu({
+          side:"right", // left or right
+          autoClose:false // auto close when page loads
+        });
+        $(".comments").find(".table").append(makeComments());
+        progressbar = $(".progress-bar");
+        if(local_index == 0){
+          makeNextButton();
+        } else if(local_index == #{courseLength}-1){
+          makePrevButton();
+        }
+        if(#{courseLength} == 1){
+          hidePageButton();
+        }
+        console.log("current "+local_index)
+        $(".btn-primary").click(function(){
+          console.log("index:"+local_index);
+          var progress = (((local_index+1)/#{courseLength})*100).toFixed(2);
+          console.log("progress"+progress);
+          $(".progress-bar").find("span").text(progress+'% complete');
+          $(".progress-bar").animate({width: progress+'%'});
+        });
+        var ptype= x[local_index]['pagetype'];
+        rendering(local_index, ptype);
+        
+      });    
+    // jquery
+    script(src="/assets/plugins/js/jquery-1.11.3.min.js")
+    // Bootstrap
+    script(src="/assets/plugins/js/bootstrap.min.js")
+    // mean menu nav
+    script(src="/assets/plugins/js/meanmenu.js")
+    // ajaxchimp
+    script(src="/assets/plugins/js/jquery.ajaxchimp.min.js")
+    // wow
+    script(src="/assets/plugins/js/wow.min.js")
+    // Owl carousel
+    script(src="/assets/plugins/js/owl.carousel.js")
+    // dropdownhover
+    script(src="/assets/plugins/js/bootstrap-dropdownhover.min.js")
+    |         
+    script(src="/assets/plugins/js/jquery.matchHeight.js")
+    // jquery-ui.min
+    script(src="/assets/plugins/js/bars.js")
+    // validator
+    script(src="/assets/plugins/js/validator.min.js")
+    // smooth scroll
+    script(src="/assets/plugins/js/smooth-scroll.js")
+    // Fancybox js
+    script(src="/assets/plugins/js/jquery.fancybox.min.js")
+    // fitvids
+    script(src="/assets/plugins/js/jquery.fitvids.js")
+    // SELECTIZE
+    script(src="/assets/plugins/js/standalone/selectize.js")
+    // isotope js
+    script(src="/assets/plugins/js/isotope.pkgd.js")
+    |         
+    script(src="/assets/plugins/js/packery-mode.pkgd.js")
+    |         
+    script(src="/assets/plugins/js/jquery.inview.min.js")
+    |         
+    //script(src="/assets/plugins/js/progressbar.min.js")
+    // <script src="/assets/plugins/js/course-review.js"></script>
+    // init
+
+    script(src="/bower_components/jquery/dist/jquery.js")
+    script(src="/js/BootSideMenu.js")
+    script(src="/js/counterAnimator.js")

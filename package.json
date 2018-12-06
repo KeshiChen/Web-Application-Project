@@ -1,0 +1,35 @@
+{
+  "name": "nodejs-blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.3",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.0",
+    "fast-csv": "^2.4.1",
+    "jquery.countup.js": "^1.0.1",
+    "mongoose": "^5.2.9",
+    "multer": "^1.4.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.3",
+    "silly-datetime": "^0.1.2",
+    "sticky-sidebar": "^3.3.1",
+    "type-of-is": "^3.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  },
+  "description": ""
+}

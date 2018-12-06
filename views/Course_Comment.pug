@@ -1,0 +1,137 @@
+
+extends layout
+block content
+    .uv-pagination
+      .container
+        ul
+          li.active
+            a(href="") Home
+          |                     
+          li
+            a(href="") Add article
+    |         
+    |   
+    //
+      |========================
+      |     Post Qusetion form
+      |========================      
+    section.uv-profile
+      .container
+        .row.section-separator
+          .col-sm-8
+            .uv-sudent-profile-info
+              .uv-student-courses-overview
+                h3 Post Question
+                |                                 
+                | 
+                br                                
+                .uv-profile-setting-inner
+                  form.uv-profile-setting-form(method="post", action="/articles/create")
+                    .row
+                      .form-group
+                        input(id="referrer", hidden, name="referrer")
+                    .row 
+                      .form-group.col-sm-8
+                        input.form-control(type="text", name="title", placeholder="Question")
+                      br
+                      br  
+                      br  
+
+                                                                                                                                                                   
+                      .form-group.col-xs-12
+                        textarea.form-control(name="body", id="", placeholder="content", cols="30", rows="6")
+                      | 
+                      .form-group
+                        input(hidden, name='com_type', value='course')
+                        input(hidden, name='coursename', value=coursename)
+                        input(hidden, name='coursepage', value=coursepage)
+                      hr
+                      |                                             
+                      .clearfix
+                      |                                             
+                      //- .col-md-2.col-sm-2
+                      //-   h9  Photo :
+                      //-   |  
+                      .col-xs-8                                                                                                 
+                      .col-xs-4
+                        br
+                        input.btn.btn-fill(type="submit", value="Post ")
+          |                     
+          .col-sm-4.uv-sidebar
+            //
+              |========================
+              |     User side panel
+              |========================
+            if user 
+             .uv-widget
+              .uv-student-avatar
+                 figure
+                    img(src="/assets/images/student-1.png", alt="")
+                 |                            
+                 .uv-student-info
+                  h5 #{user.username}
+                 |                             
+                 .uv-student-infor-inner
+                  
+                  .div
+                   h9 Email  :  #{user.email} 
+                  .div                             
+                   h9 Reword Point : #{user.rewardpoints}
+                  |
+                  br
+                  a(href="#") My Post &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  a(href="http://localhost:5000/articles/new") Add Posts 
+                  br
+                  a(href='/datasets_firstpage/checkdataset/mydataset') My Datasets  &nbsp;&nbsp;&nbsp;
+                  a(href="#") Upload Datasets              
+
+
+    //
+      |========================
+      |      Script
+      |========================
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script.
+      $(function(){
+        console.log(document.referrer);
+        $('#referrer').val(document.referrer);
+      });
+    // jquery
+    script(src="/assets/plugins/js/jquery-1.11.3.min.js")
+    // Bootstrap
+    script(src="/assets/plugins/js/bootstrap.min.js")
+    // mean menu nav
+    script(src="/assets/plugins/js/meanmenu.js")
+    // ajaxchimp
+    script(src="/assets/plugins/js/jquery.ajaxchimp.min.js")
+    // wow
+    script(src="/assets/plugins/js/wow.min.js")
+    // Owl carousel
+    script(src="/assets/plugins/js/owl.carousel.js")
+    // dropdownhover
+    script(src="/assets/plugins/js/bootstrap-dropdownhover.min.js")
+    // jquery-ui.min
+    script(src="/assets/plugins/js/bars.js")
+    // validator
+    script(src="/assets/plugins/js/validator.min.js")
+    |         
+    script(src="/assets/plugins/js/jquery.matchHeight.js")
+    // smooth scroll
+    script(src="/assets/plugins/js/smooth-scroll.js")
+    // Fancybox js
+    script(src="/assets/plugins/js/jquery.fancybox.min.js")
+    // fitvids
+    script(src="/assets/plugins/js/jquery.fitvids.js")
+    // SELECTIZE
+    script(src="/assets/plugins/js/standalone/selectize.js")
+    // isotope js
+    script(src="/assets/plugins/js/isotope.pkgd.js")
+    |         
+    script(src="/assets/plugins/js/packery-mode.pkgd.js")
+    |         
+    script(src="/assets/plugins/js/jquery.inview.min.js")
+    |         
+    script(src="/assets/plugins/js/progressbar.min.js")
+    // <script src="/assets/plugins/js/course-review.js"></script>
+    // init
+    script(src="/assets/js/init.js")

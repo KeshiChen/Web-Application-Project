@@ -1,0 +1,204 @@
+
+extends layout_community
+block content
+    //
+      |========================
+      |      Features Section
+      |========================       
+    .uv-pagination
+      .container
+        ul
+          li.active
+            a(href="/") Home
+          |                     
+          li
+            a(href="/community_home") Community
+    |         
+    |         
+    |         
+    section.uv-single-blog
+      .container
+        .row.section-separator
+          .col-sm-8
+            .blog-wrapper.single-blog-wrapper.shadow-border
+              .blog-title
+                a.category_title(href="#", title="") Type: #{articletype}
+                |                                 
+                h2
+                  a(href="#", title="") #{articletitle}
+                |                                 
+                .post-meta
+                  span
+                    i.fa.fa-user
+                    |                                         
+                    a(href="#") #{articleauthor}
+                  |                                            
+                  span
+                    i.fa.fa-comments
+                    |                                         
+                    a(href="#") #{reply_count} comments
+                  |                                     
+                  span
+                    i.fa.fa-eye
+                    |                                         
+                    a(href="#") #{articlepopular} Views
+                  |                                     
+                  span
+                    i.fa.fa-clock-o
+                    |                                         
+                    a(href="#") #{articletime}
+              |                             
+              |                             
+              .blog-desc
+                p   #{articlebody}                            
+                hr.invis
+                |                                               
+                .tags
+                  if user && user.username == articleauthor
+                    a(href="/articles/"+ articleid + "/edit",title=Edit) Edit
+                    |                                     
+                    a.delete-article(href="#", data-id=article_id) Delete 
+            .blog-wrapper.comment-wrapper
+                      
+                      #reviews.feedbacks
+                        h5 Comments  #{replycount}
+                        |                             
+                        div
+                          .well
+                            - var replycount = 0
+                        
+                            each reply, i in replys
+                              - var j =replycount= replycount + 1 
+                              .media
+                              .media-left
+                                a(href="#")
+                                  img(src="/assets/images/student-1.png")
+                              |                                     
+                              .media-body
+                                h4.media-heading #{reply.author}
+                                |                                         
+                                .time-comment.clearfix
+                                  small.pull-left #{reply.time}
+                                |                                         
+                                p #{reply.body}
+                              |                                                             
+                              |  
+                            if user                               
+                              .ldx-blog-comment-form
+                              .comment-title
+                                h4 Leave a Reply
+                                |                                         
+                                hr.uv-hr-title
+                                |                                         
+                              |                                     
+                              form#contact-form.single-form.comment-form(method="post", action="/replys/createreply")
+                                .row                                                                        
+                                  .col-sm-12.ldx-comment-form-group
+                                    textarea#contact-message.contact-message.form-control(name="body",rows="5", minlength="30",placeholder="Your Reply", required="")
+                                    input(id='article_id', hidden, name='article_id',  value=article_id)
+                                    input(id='replycount', hidden, name='replycount',  value=replycount)
+                                  .btn-form.col-xs-12
+                                    button.btn.btn-fill(type="submit", value="Submit")  Post Comment 
+
+                
+          |  
+          //
+            |========================
+            |    User side panel
+            |========================                     
+          .col-sm-4.uv-sidebar
+            if user 
+             .uv-widget
+              .uv-student-avatar
+                 
+                 figure(align="center")
+                    
+                    img(src=user.portrait, alt="")
+                 |                            
+                 .uv-student-info
+                  h5 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{user.username}
+                 |                             
+                 .uv-student-infor-inner
+                  
+                  .div
+                   h9 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Email  :  #{user.email} 
+                  .div                             
+                   h9 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Reward Point : #{user.rewardpoints*100}
+                  |
+                  br
+                  a(href='/articles/userartic') &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; My Post &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  a(href="http://localhost:5000/articles/new") Add Posts 
+                  br
+                  .div
+                    
+                    .input-group
+                    button.btn.btn-link(type="button", data-toggle="modal", data-target="#exampleModal", data-whatever="@mdo") Upload &nbsp;&nbsp;
+                    a(href="#") My Datasets  
+
+                    // Modal
+                    #exampleModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+                      .modal-dialog(role="document")
+                        .modal-content
+                          .modal-header
+                            h5#exampleModalLabel.modal-title New Dataset
+                            |
+                            button.close(type="button", data-dismiss="modal", aria-label="Close")
+                              span(aria-hidden="true") �
+                          |
+                          .modal-body
+                            if user
+                             form(action="/datasets_firstpage/upload/"+user._id,method="post", enctype="multipart/form-data")
+                                  .form-group
+                                    label.col-form-label(for="recipient-name") Title:
+                                    |
+                                    input#recipient-name.form-control(name = "Title",type="text")
+                                  |
+                                  .form-group
+                                    label.col-form-label(for = "message-text") Description:
+                                    |
+
+
+
+                                    textarea#message-text.form-control(name = "Description")
+                                  |
+                                  .form-group
+                                    .input-group.mb-3
+                                      |
+                                      input(type="file", name="dataset_upload",id="dataset_upload",multiple="multiple")
+
+                                  |
+                                  button.btn.btn-primary(type="submit") Submit
+                            else
+                               a.btn.btn-link(href="http://localhost:5000/login") Please Login                
+            .clearfix
+            |                                               
+            .uv-widget
+              .widget-title
+                h4 Popular Courses
+                |                                 
+                hr
+              |                             
+              ul.popular-courses
+                li
+                  a(href="#", title="")
+                    img.img-responsive(src="/assets/images/ct7.jpg", alt="")
+                |                                 
+                li
+                  a(href="#", title="")
+                    img.img-responsive(src="/assets/images/ct8.jpg", alt="")
+                |                                 
+                li
+                  a(href="#", title="")
+                    img.img-responsive(src="/assets/images/ct9.jpg", alt="")
+                |                                 
+                li
+                  a(href="#", title="")
+                    img.img-responsive(src="/assets/images/photography.jpg", alt="")
+                |                                 
+                li
+                  a(href="#", title="")
+                    img.img-responsive(src="/assets/images/wordpress.jpg", alt="")
+                |                                 
+                li
+                  a(href="#", title="")
+                    img.img-responsive(src="/assets/images/javascript.png", alt="")

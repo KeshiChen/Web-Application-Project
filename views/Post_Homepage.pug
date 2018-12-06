@@ -1,0 +1,208 @@
+extends layout_community
+block content
+        
+    //
+      |========================
+      |      Features Section
+      |========================
+    section.uv-subpage-heading.image-bg(style="background-image: url(/assets/images/header-bg-1.jpg);")
+      .overlay
+        .container
+          .row
+            .uv-subhead-content.col-xs-12
+              h2 Community
+    |         
+    .uv-pagination
+      .container
+        ul
+          li.active
+            a(href="") Home
+          |                     
+          li
+            a(href="") Community
+    |         
+    |         
+    |         
+    section.uv-single-blog
+      .container
+        //
+          |========================
+          |      All the Posts informatiom
+          |========================  
+        
+        .row.section-separator
+        
+          .col-sm-8
+            each article, i in articles.reverse()
+              -var daylist = [Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Aug,Nov,Dec]
+              .blog-wrapper.shadow-border.single-blog-wrapper
+                .blog-title
+                  a.category_title(href="#", title="") Type: #{article.com_type}
+                  |                                 
+                  h2
+                    a(href="/articles/" + article._id, title="")  #{article.title} 
+                    br
+                    br
+
+                  |                                 
+                  .post-meta
+                    span
+                      i.fa.fa-user
+                      |                                         
+                      a(href="#") #{article.author}
+                    |                                     
+                    span
+                      i.fa.fa-tag
+                      |                                         
+                      a(href="#") #{article.com_type}
+                    |                                     
+                    span
+                      i.fa.fa-comments
+                      |                                         
+                      a(href="#") #{article.reply_count} comments
+                    |                                     
+                    span
+                      i.fa.fa-eye
+                      |                                         
+                      a(href="#") #{article.popular} Views
+                |                             
+                |                             
+                .blog-desc
+                  .post-date
+                    span.day #{article.day}
+                    |                               
+                    span.month #{article.month}
+                  |                                 
+                  if article.body.length>= 400                     
+                     -var body = article.body.substring(0,400) + "..."                              
+                     p= body 
+                  else 
+                    p=article.body                           
+                  a.readmore(href="/articles/" + article._id) Read More
+                |                                              
+            .uv_pagination_outer_wrap
+              ul
+                li
+                  a(href="#")
+                    i.fa.fa-angle-double-left
+                |                                 
+                li.active
+                  a(href="#") 1
+                |                                 
+                li
+                  a(href="#") 2
+                |                                 
+                li
+                  a(href="#") 3
+                |                                 
+                li
+                  a(href="#")
+                    i.fa.fa-angle-double-right
+          |                     
+          .col-sm-4.uv-sidebar
+            .uv-widget
+                form(method="get", action="/articles/search")
+
+                  input.form-control(type="text",name="search" placeholder="Search Post Title")
+                  select.select-beast(name="com_type")
+                    option(value="0", selected="selected") All type
+                      option.level-0(value="course") course
+                      option.level-0(value="dataset") dataset
+                      option.level-0(value="other") other
+                  input.btn.btn-primary(type="submit", value="Submit")
+              
+            if user 
+             .uv-widget
+              .uv-student-avatar
+                 
+                 figure(align="center")
+                    
+                    img(src=user.portrait, alt="")
+                 |                            
+                 .uv-student-info
+                  h5 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{user.username}
+                 |                             
+                 .uv-student-infor-inner
+                  
+                  .div
+                   h9 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Email  :  #{user.email} 
+                  .div                             
+                   h9 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Reward Point : #{user.rewardpoints*100}
+                  |
+                  br
+                  a(href="/articles/userartic") &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; My Post &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  a(href="http://localhost:5000/articles/new") Add Posts 
+                  br
+                  .div
+                    
+                    .input-group
+                    button.btn.btn-link(type="button", data-toggle="modal", data-target="#exampleModal", data-whatever="@mdo") Upload &nbsp;&nbsp;
+                    a(href='/profile_datasets/'+user.username) My Datasets  
+
+                    // Modal
+                    #exampleModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+                      .modal-dialog(role="document")
+                        .modal-content
+                          .modal-header
+                            h5#exampleModalLabel.modal-title New Dataset
+                            |
+                            button.close(type="button", data-dismiss="modal", aria-label="Close")
+                              span(aria-hidden="true") ×
+                          |
+                          .modal-body
+                            if user
+                             form(action="/datasets_firstpage/upload/"+user._id,method="post", enctype="multipart/form-data")
+                                  .form-group
+                                    label.col-form-label(for="recipient-name") Title:
+                                    |
+                                    input#recipient-name.form-control(name = "Title",type="text")
+                                  |
+                                  .form-group
+                                    label.col-form-label(for = "message-text") Description:
+                                    |
+
+
+
+                                    textarea#message-text.form-control(name = "Description")
+                                  |
+                                  .form-group
+                                    .input-group.mb-3
+                                      |
+                                      input(type="file", name="dataset_upload",id="dataset_upload",multiple="multiple")
+
+                                  |
+                                  button.btn.btn-primary(type="submit") Submit
+                            else
+                               a.btn.btn-link(href="http://localhost:5000/login") Please Login
+                      
+            .uv-widget
+              .widget-title
+                h4 Popular Courses
+                |                                 
+                hr
+              |                             
+              ul.popular-courses
+                li
+                  a(href="#", title="")
+                    img.img-responsive(src="/assets/images/ct7.jpg", alt="")
+                |                                 
+                li
+                  a(href="#", title="")
+                    img.img-responsive(src="/assets/images/ct8.jpg", alt="")
+                |                                 
+                li
+                  a(href="#", title="")
+                    img.img-responsive(src="/assets/images/ct9.jpg", alt="")
+                |                                 
+                li
+                  a(href="#", title="")
+                    img.img-responsive(src="/assets/images/photography.jpg", alt="")
+                |                                 
+                li
+                  a(href="#", title="")
+                    img.img-responsive(src="/assets/images/wordpress.jpg", alt="")
+                |                                 
+                li
+                  a(href="#", title="")
+                    img.img-responsive(src="/assets/images/javascript.png", alt="")
+            |                         

@@ -1,0 +1,307 @@
+extends layout
+block content
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script.
+      $(document).ready(function(){
+        $.ajax({
+          url: "/topusers", 
+          dataType: 'json',  
+          success: function(data){
+            console.log(data);
+            var topusers = data.topusers;
+            $("#uv-blog-carousel").find(".owl-item").each(function(index){
+              console.log(index);
+              $(this).find("h4").text(topusers[index]['names']);
+              $(this).find("span").text(topusers[index]['description']).append("br").text("Score: "+topusers[index]['rewardpoints']*100);
+              $(this).find("img").attr("src", topusers[index]['portrait']);
+            });
+          }
+        });
+      });
+    section#header-slider.header-slider.header-slider-preloader
+        #animation-slide.animation-slides.owl-carousel.owl-theme
+          // Slide 1
+          .item(style="background-image:url(/assets/images/course-bg.jpg)")
+            .slide-table
+              .slide-tablecell
+                .container
+                  .row
+                    .col-md-7.col-xs-12
+                      .slide-text
+                        span Learn what you create
+                        |                                             
+                        h1
+                          | DATA SCIENCE COURSES                                        
+                        .slide-buttons
+                          a.slide-btn.btn.btn-base(href="/courses") Start Now
+          // Slide 2
+          .item(style="background-image:url(/assets/images/home-2-bg.jpg)")
+            .slide-table
+              .slide-tablecell
+                .container
+                  .row
+                    .col-md-7
+                      .slide-text
+                        span MOST POWERFUL ONLINE LEARNING COMMUNITY
+                        |                                             
+                        h1 GET STARTED WITH ONLINE EDUCATION   
+                        .slide-buttons
+                          a.slide-btn.btn.btn-base(href="/community_home") Start Now
+          // Slide 3
+          .item(style="background-image:url(/assets/images/header-bg-1.jpg)")
+            .slide-table
+              .slide-tablecell
+                .container
+                  .row
+                    .col-md-7
+                      .slide-text                             
+                        h1
+                          | ARE YOU READY 
+                          br
+                          |  TO APPLY?                                           
+                        .slide-buttons
+                          a.slide-btn.btn.btn-base(href="/courses") Get Start Now
+
+    //
+      |========================
+      |  Featured courses
+      |========================
+    section.uv-feature-2
+      .container
+        .row.section-separator
+          .uv-secton-title.wow.fadeIn(data-wow-delay="0.2s")
+            h2 Our Top Courses
+            |
+            hr.uv-section-hr
+          |
+          .col-xs-12
+            .uv-course-inner-2
+              .row
+                .col-sm-6.wow.fadeInUp(data-wow-delay="0.4s")
+                  a(href="/courses/Machine Learning")
+                    .image-bg.uv-course-highlight(style="background-image: url(https://cdn-images-1.medium.com/max/1200/1*3CXBOKNql4qS-lRyHT3pqw.png);")
+                      .uv-overlay
+                        .inner-course-heighlight-left
+                          i.fa.flaticon-presentation
+                          |
+                          h4 Machine Learning
+                |
+                .col-sm-6.wow.fadeInUp(data-wow-delay="0.4s")
+                  a(href="/courses/Python for data science")
+                    .inner-course-heighlight-right-top.image-bg.uv-course-highlight(style="background-image: url(https://www.kdnuggets.com/images/datacamp-python-1.jpg);")
+                      .uv-overlay
+                        .inner-course-heighlight-right
+                          i.fa.flaticon-photo-camera
+                          |
+                          .uv-highlight-caption
+                            h4 Python Programming
+          |
+          .col-xs-12
+            div
+              .uv-courses-2
+    //
+      |========================
+      |   Course slide
+      |========================
+    section.uv-course-slide.image-bg(style="background-image:url(/assets/images/home-2-bg.jpg)")
+      .color-overlay-2
+        .container
+          .row.section-separator
+            .each-inner-top.col-xs-12
+              h2 Get the data science courses FREE
+              |
+              p
+                | Through these courses, you will learn data science from fundamentals to advanced topics,
+                | and the programming language of it.
+            |
+            #uv-course-slide.col-xs-12
+              for course in courses
+                .item
+                  .shadow-effect.uv-course-slide-inner
+                    .image-bg(style="background-image:url("+course.image+")")
+                      .color-overlay-3.each-inner
+                        a(data-fancybox="", href="/courses/"+course.coursename)
+                          i.fa.flaticon-play-button-1.video-icon
+                        |
+                        h3 #{course.coursename} - #{course.description}
+                        |
+                        .uv-slide-course-rating
+                          i.fa.fa-star-o
+                          |
+                          i.fa.fa-star-o
+                          |
+                          i.fa.fa-star-o
+                          |
+                          i.fa.fa-star-o
+                          |
+                          i.fa.fa-star-o
+                          |
+                          span ( 120 Ratings )
+                        |
+                        ul
+                          li
+                            a(href="")
+                              i.fa.fa-facebook
+                          |
+                          li
+                            a(href="")
+                              i.fa.fa-twitter
+                          |
+                          li
+                            a(href="")
+                              i.fa.fa-linkedin
+                          |
+                          li
+                            a(href="")
+                              i.fa.fa-dribbble
+                          |
+                          li
+                            a(href="")
+                              i.fa.fa-codepen
+                          |
+                          li
+                            a(href="")
+                              i.fa.fa-vimeo
+                    |
+                    .uv-course-slide-content
+                      ul
+                        |
+                        li.col-sm-4.col-xs-12
+                          .uv-slide-teacher
+                            img(src="/assets/images/default_portrait.png", alt="")
+                            |
+                            .uv-trainer-info
+                              span Creator
+                              |
+                              h4 KeshiChen
+                        |
+                        li.col-sm-4.col-xs-12
+                          .uv-slide-sudent-info
+                            span Views
+                            |
+                            h4 360 views
+    //
+      |========================
+      |   Blog 2
+      |========================
+    //
+      |========================
+      |  Top users
+      |========================
+    section.uv-blog.uv-teachers.bg-2
+      .container
+        .row.section-separator
+          .section-title.col-xs-12.wow.fadeIn(data-wow-delay="0.2s")
+            h2 Community Stars
+            |
+            span Community members with the greatest contribution
+            |
+            hr.uv-hr
+          |
+          #uv-blog-carousel.each-blogs.col-xs-12.wow.fadeIn(data-wow-delay="0.4s")
+            .item
+              .blog-inner
+                .blog-banner
+                  img.img-responsive(src="/assets/images/tc3.jpg", alt="")
+                |
+                .blog-content
+                  h4 Luyes Figrey
+                  |
+                  .blog-schedule
+                    a(href="")
+                      h4 Luyes Figrey
+                    |
+                    span Laravel Expert
+                    |
+                    ul
+                      li
+                        a(href="")
+                          i.fa.fa-facebook
+                      |
+                      li
+                        a(href="")
+                          i.fa.fa-twitter
+                      |
+                      li
+                        a(href="")
+                          i.fa.fa-linkedin
+                      |
+                      li
+                        a(href="")
+                          i.fa.fa-dribbble
+                      |
+                      li
+                        a(href="")
+                          i.fa.fa-youtube
+            |
+            |
+            .item
+              .blog-inner
+                .blog-banner
+                  img.img-responsive(src="/assets/images/tc1.jpg", alt="")
+                |
+                .blog-content
+                  h4 Albert Robber
+                  |
+                  .blog-schedule
+                    a(href="")
+                      h4 Albert Robber
+                    |
+                    span PHP Developer
+                    |
+                    ul
+                      li
+                        a(href="")
+                          i.fa.fa-facebook
+                      |
+                      li
+                        a(href="")
+                          i.fa.fa-twitter
+                      |
+                      li
+                        a(href="")
+                          i.fa.fa-linkedin
+                      |
+                      li
+                        a(href="")
+                          i.fa.fa-dribbble
+                      |
+                      li
+                        a(href="")
+                          i.fa.fa-youtube
+            |
+            |
+            .item
+              .blog-inner
+                .blog-banner
+                  img.img-responsive(src="/assets/images/tc2.jpg", alt="")
+                |
+                .blog-content
+                  h4 Jhon Watson
+                  |
+                  .blog-schedule
+                    a(href="")
+                      h4 Jhon Watson
+                    |
+                    span JavaScript Expert
+                    |
+                    ul
+                      li
+                        a(href="")
+                          i.fa.fa-facebook
+                      |
+                      li
+                        a(href="")
+                          i.fa.fa-twitter
+                      |
+                      li
+                        a(href="")
+                          i.fa.fa-linkedin
+                      |
+                      li
+                        a(href="")
+                          i.fa.fa-dribbble
+                      |
+                      li
+                        a(href="")
+                          i.fa.fa-youtube

@@ -1,0 +1,352 @@
+doctype html
+//if IE 7
+  html.no-js.ie7.oldie(lang="en-US")  
+//if IE 8
+  html.no-js.ie8.oldie(lang="en-US")  
+// [if gt IE 8] <!
+html(lang="zxx")
+  head
+    // TITLE OF SITE
+    title  DataDemy | Community 
+    // Meta
+    meta(charset="utf-8")
+    |         
+    meta(name="description", content="app landing page template")
+    |         
+    meta(name="keywords", content="app, landing page, bootstrap")
+    |         
+    meta(name="developer", content="")
+    |         
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1")
+
+
+    // Page level plugin CSS
+    link(href="/datasetupload2/vendor/datatables/dataTables.bootstrap4.css", rel="stylesheet")
+
+    
+    // FAV AND ICONS
+    link(rel="icon", href="/assets/images/favicon.png", sizes="32x32")
+    |         
+    link(rel="icon", href="/assets/images/apple-icon-192.png", sizes="192x192")
+    |         
+    link(rel="apple-touch-icon-precomposed", href="/assets/images/apple-icon-180.png")
+    // GOOGLE FONTS
+    link(href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,700%7cVarela+Round", rel="stylesheet")
+    // FONT ICONS
+    link(rel="stylesheet", href="/assets/icons/font-awesome-4.7.0/css/font-awesome.min.css")
+    // Custom Icon Font
+    link(rel="stylesheet", href="/assets/font/flaticon.css")
+    // Bootstrap
+    link(rel="stylesheet", href="/assets/plugins/css/bootstrap.min.css")
+
+    // Animation
+    link(rel="stylesheet", href="/assets/plugins/css/animate.css")
+    // owl
+    link(rel="stylesheet", href="/assets/plugins/css/owl.css")
+    // selectize
+    link(rel="stylesheet", href="/assets/plugins/css/selectize.css")
+    |         
+    link(rel="stylesheet", href="/assets/plugins/css//selectize.bootstrap3.css")
+    // Fancybox
+    link(rel="stylesheet", href="/assets/plugins/css/jquery.fancybox.min.css")
+    // dropdown
+    link(rel="stylesheet", href="/assets/plugins/css/bootstrap-dropdownhover.min.css")
+    // mobile nav
+    link(rel="stylesheet", href="/assets/plugins/css/meanmenu.css")
+    // COUSTOM CSS link
+    link(rel="stylesheet", href="/assets/less/style_community.css")
+    |         
+    link(rel="stylesheet", href="/assets/less/responsive.css")
+    |
+    // Custom fonts for this template
+    link(href="/datasetupload2/vendor/fontawesome-free/css/all.min.css", rel="stylesheet", type="text/css")
+    // Page level plugin CSS
+    link(href="/datasetupload2/vendor/datatables/dataTables.bootstrap4.css", rel="stylesheet")
+    // Custom styles for this template
+    link(href="/datasetupload2/css/sb-admin.css", rel="stylesheet")  
+    //if lt IE 9
+      script(src="js/plagin-js/html5shiv.js")
+      |             
+      script(src="js/plagin-js/respond.min.js")
+  |     
+  body.subpage.Community-bg
+    //
+      |========================
+      |  HEADER
+      |========================
+    header.xt-header
+    .xt-header-top
+      .container
+        .row
+          .col-sm-6.uv-header-contact
+            a(href="")
+              i.fa.fa-phone
+              | (519) - 875 - 9822
+            |
+            a(href="")
+              i.fa.fa-envelope-o
+              | info@DataDemy.edu
+          |
+          .col-sm-6.uv-header-user
+            if user
+              a.nav-link(href='/editor') &nbsp; COURSE CREATOR  &nbsp;
+              a.nav-link(href='/profile/'+user.username)= user.username 
+              a.nav-link(href='/logout') &nbsp; Logout
+            else 
+              a(href="/login")
+                i.fa.fa-lock
+                | login/register
+              |
+              |
+    |
+    .clearfix
+    |
+    .xt-main-nav
+      nav.navbar.nav-scroll.home-1
+        .container
+          .row
+            .col-sm-4
+              .uv-logo
+                h7 DataDemy
+            |
+            .col-sm-8.pull-right
+              .navbar-header
+                button.navbar-toggle.collapsed(type="button", data-toggle="collapse", data-action="#js-navbar-menu", aria-expanded="false")
+                  span.icon(aria-hidden="true")
+              |
+              #js-navbar-menu.collapse.navbar-collapse
+                ul#navbar-nav.nav.navbar-nav.ep-mobile-menu
+                  li
+                    a(href="/") Home
+                  |
+                  li
+                    a(href="/courses") Course
+                  if user
+                    li
+                      a(href="/profile/"+user.username) Profile
+                  li
+                    a(href='/community_home') Community
+                  li
+                    a(href="/datasets_firstpage") Datasets
+        
+    //
+      |========================
+      |      Features Section
+      |========================
+    section.uv-subpage-heading.image-bg(style="background-image: url(/assets/images/header-bg-1.jpg);")
+      .overlay
+        .container
+          .row
+            .uv-subhead-content.col-xs-12
+              h2 Datasets
+    |         
+    .uv-pagination
+      .container
+        ul
+          li.active
+            a(href="") Home
+          |                     
+          li
+            a(href="") Datasets
+
+    |         
+    |         
+    | 
+    #content-wrapper
+  != messages('message', locals)
+  section.uv-single-blog
+    .container
+        .row.section-separator
+          .col-sm-8
+            .card.mb-3
+              //- .div(align="right") 
+              //-       a(href="#") My Post &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              //-       a(href="http://localhost:5000/articles/new") Add Posts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              //-       br
+              //-       a(href="#") My Datasets  &nbsp;&nbsp;&nbsp;
+              //-       a(href="#") Upload Datasets              
+     
+
+              .card-body
+                .table-responsive
+                  table#dataTable.table.table-bordered(width="100%", cellspacing="0")
+                    thead
+                      tr
+                        th Dataset
+                        |
+                        th(width="60%") Description
+                        |
+                        th(width="10%") DataType
+                        |
+                        th(width="10%") DataSize
+                        |
+                    |
+                    tbody
+                      each dataset, i in datasets
+                        tr
+                            td
+                               a(href="/datasets_firstpage/checkdataset/" + dataset._id,style="font-size:20px;color:#000000; ") #{dataset.title} 
+                            |
+                            td #{dataset.Description}
+                            |
+                            td #{dataset.datatype}
+                            |
+                            td #{dataset.datasetSize}
+                            |
+          .col-sm-4.uv-sidebar
+                              if user 
+                               .uv-widget
+                                .uv-student-avatar
+                                   
+                                   figure(align="center")
+                                      
+                                      img(src=user.portrait, alt="")
+                                   |                            
+                                   .uv-student-info
+                                    h5 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{user.username}
+                                   |                             
+                                   .uv-student-infor-inner
+                                    
+                                    .div
+                                     h9 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Email  :  #{user.email} 
+                                    .div                             
+                                     h9 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Reward Point : #{user.rewardpoints*100}
+                                    |
+                                    br
+                                    a(href="/articles/userartic") &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; My Post &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    a(href="http://localhost:5000/articles/new") Add Posts 
+                                    br
+                                    .div
+                                      
+                                      .input-group
+                                      button.btn.btn-link(type="button", data-toggle="modal", data-target="#exampleModal", data-whatever="@mdo") Upload &nbsp;&nbsp;
+                                      a(href='/profile_datasets/'+user.username) My Datasets  
+
+                                      // Modal
+                                      #exampleModal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+                                        .modal-dialog(role="document")
+                                          .modal-content
+                                            .modal-header
+                                              h5#exampleModalLabel.modal-title New Dataset
+                                              |
+                                              button.close(type="button", data-dismiss="modal", aria-label="Close")
+                                                span(aria-hidden="true") ×
+                                            |
+                                            .modal-body
+                                              if user
+                                               form(action="/datasets_firstpage/upload/"+user._id,method="post", enctype="multipart/form-data")
+                                                    .form-group
+                                                      label.col-form-label(for="recipient-name") Title:
+                                                      |
+                                                      input#recipient-name.form-control(name = "Title",type="text", 
+                                                      required)
+                                                    |
+                                                    .form-group
+                                                      label.col-form-label(for = "message-text") Description:
+                                                      |
+
+
+
+                                                      textarea#message-text.form-control(name = "Description")
+                                                    |
+                                                    .form-group
+                                                      .input-group.mb-3
+                                                        |
+                                                        input(type="file", name="dataset_upload",id="dataset_upload",multiple="multiple" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv,application/vnd.ms-excel")
+
+                                                    |
+                                                    button.btn.btn-primary(type="submit") Submit
+                                              else
+                                                 a.btn.btn-link(href="http://localhost:5000/login") Please Login
+                              .uv-widget
+                                                   .widget-title
+                                                     h4 Popular Courses
+                                                     |                                 
+                                                     hr
+                                                   |                             
+                                                   ul.popular-courses
+                                                     li
+                                                       a(href="#", title="")
+                                                         img.img-responsive(src="/assets/images/ct7.jpg", alt="")
+                                                     |                                 
+                                                     li
+                                                       a(href="#", title="")
+                                                         img.img-responsive(src="/assets/images/ct8.jpg", alt="")
+                                                     |                                 
+                                                     li
+                                                       a(href="#", title="")
+                                                         img.img-responsive(src="/assets/images/ct9.jpg", alt="")
+                                                     |                                 
+                                                     li
+                                                       a(href="#", title="")
+                                                         img.img-responsive(src="/assets/images/photography.jpg", alt="")
+                                                     |                                 
+                                                     li
+                                                       a(href="#", title="")
+                                                         img.img-responsive(src="/assets/images/wordpress.jpg", alt="")
+                                                     |                                 
+                                                     li
+                                                       a(href="#", title="")
+                                                         img.img-responsive(src="/assets/images/javascript.png", alt="")
+                              |        
+
+                              
+                                              
+  footer.uv-footer.footer-bg.section-separator
+    .container
+      |                 
+      hr.f-hr
+      |                 
+    //
+      |========================
+      |      Script
+      |========================
+    //- /* script(src="/datasetupload2/vendor/jquery/jquery.min.js") */
+    // init
+    script(src="/assets/js/init.js")
+    // jquery
+    script(src="/assets/plugins/js/jquery-1.11.3.min.js")
+    // Page level plugin JavaScript
+    script(src="/datasetupload2/vendor/datatables/jquery.dataTablesDatasetFirstPage.js")
+    |
+    script(src="/datasetupload2/vendor/datatables/dataTables.bootstrap4.js")
+    // Demo scripts for this page
+    script(src="/datasetupload2/js/demo/datatables-demo.js")
+
+
+    // Bootstrap
+    script(src="/assets/plugins/js/bootstrap.min.js")
+    // mean menu nav
+    script(src="/assets/plugins/js/meanmenu.js")
+    // ajaxchimp
+    script(src="/assets/plugins/js/jquery.ajaxchimp.min.js")
+    // wow
+    script(src="/assets/plugins/js/wow.min.js")
+    // Owl carousel
+    script(src="/assets/plugins/js/owl.carousel.js")
+    // dropdownhover
+    script(src="/assets/plugins/js/bootstrap-dropdownhover.min.js")
+    |         
+    script(src="/assets/plugins/js/jquery.matchHeight.js")
+    // jquery-ui.min
+    script(src="/assets/plugins/js/bars.js")
+    // validator
+    script(src="/assets/plugins/js/validator.min.js")
+    // smooth scroll
+    script(src="/assets/plugins/js/smooth-scroll.js")
+    // Fancybox js
+    script(src="/assets/plugins/js/jquery.fancybox.min.js")
+    // fitvids
+    script(src="/assets/plugins/js/jquery.fitvids.js")
+    // SELECTIZE
+    script(src="/assets/plugins/js/standalone/selectize.js")
+    // isotope js
+    script(src="/assets/plugins/js/isotope.pkgd.js")
+    |         
+    script(src="/assets/plugins/js/packery-mode.pkgd.js")
+    |         
+    script(src="/assets/plugins/js/jquery.inview.min.js")
+    |         
+    script(src="/assets/plugins/js/progressbar.min.js")
+    // init
+    script(src="/assets/js/init.js")

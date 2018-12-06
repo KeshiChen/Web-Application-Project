@@ -1,0 +1,209 @@
+
+extends layout_courses
+block content
+    |         
+    section.uv-subpage-heading.image-bg(style="background-image: url(/assets/images/header-bg-1.jpg);")
+      .overlay
+        .container
+          .row
+            .uv-subhead-content.col-xs-12
+              h2 Search course 
+              |                             
+              span DataDemy
+    |         
+    .uv-pagination
+      .container
+        ul
+          li.active
+            a(href="") Home
+          |                     
+          li
+            a(href="") Courses
+    |         
+    |   
+    //
+      |========================
+      |     Search Bar
+      |========================          
+    section.uv-course-archive
+      .container
+        .row.section-separator
+          .col-md-9.col-sm-8
+            .uv-course-nav
+              form.uv-nav-form(action="/courseSearch", method="post")
+                ul.row(id="ttt" style="display: block")
+                  li.col-md-3
+                    select.select-beast(name="category")
+                      option(value="0", selected="selected") All Categories
+                        option.level-0(value="machine learning") Machine Learning
+                        option.level-0(value="python") Python
+                        option.level-0(value="big_data") Big Data
+                        option.level-0(value="dataviz") Data Visualization
+                        option.level-0(value="Algo") Algorithm
+                                         
+                  li.col-md-3
+                    select.select-beast(name="level")
+                      option(value="0", selected="selected") All Levels
+                        option(value="Basic") Basic                     
+                        option(value="Intermediate") Intermediate                        
+                        option(value="Advanced") Advanced
+                  |                                     
+                  li.col-md-3
+                    select.select-beast(name="tags")
+                      option(value="0", selected="selected") All Course Tags 
+                        option.level-0(value="collect") Data Collection
+                        option.level-0(value="preprocess") Data Preprocesing
+                        option.level-0(value="model") Model Evaluation
+                        option.level-0(value="visualize") Data Visualization
+                  |                                     
+                  li.col-md-3
+                    input.btn.btn-fill(type="submit", value="Search")
+                    |
+                    button(class="searchbutton" type="button" onclick="showKeySearch()") search by keyword
+                  //button(class="searchbutton" type="submit") search by keyword
+                
+                ul.row(id="sss" style="display:none")
+                  li.col-md-9
+                    label(for='name')
+                    input.form-control(type='text', placeholder='Type in the keyword: python etc' name='keyword')
+                  |
+                  li.col-md-3
+                    input.btn.btn-fill(type="submit", value="Search")
+                    |
+                    button(class="searchbutton" type="button" onclick="showTagSearch()") search by tags
+            script.
+              var showKeySearch = function () {
+              console.log('show');
+              document.getElementById("sss").style.display= "block";
+              document.getElementById("ttt").style.display= "none";
+              }
+
+              var showTagSearch = function () {
+                console.log('show');
+                document.getElementById("ttt").style.display= "block";
+                document.getElementById("sss").style.display= "none";
+              }
+            //
+              |========================
+              |     List the search result
+              |========================    
+
+            .row
+              .uv-courses-2
+                each course, i in courses
+                  div
+                    .col-md-4.col-sm-6
+                      .uv-courese-single-thumb.uv-shadow
+                        .uv-post-img
+                          img.img-responsive(src= course.image style="height:150px;width:300px" alt="")
+                          |                                                 
+                          .uv-post-author
+                            img(src="/assets/images/default_portrait.png", alt="")
+                            |                                                     
+                            span chenkeshi
+                        |                                             
+                        .uv-course-thumb-inner
+                          a(href="/courses/" + course.coursename data-toggle="tooltip" title=course.description)
+                            h4 #{course.coursename}
+                        |                                             
+                        ul.course-info-2
+                          li.course-info-2
+                            i.fa.fa-users
+                            |                                                     
+                            span 500 Students
+                          |                                                 
+                          li.uv-course-rating
+                            i.fa.fa-star
+                            |                                                     
+                            i.fa.fa-star
+                            |                                                     
+                            i.fa.fa-star
+                            |                                                     
+                            i.fa.fa-star
+                            |                                                     
+                            i.fa.fa-star
+          |                     
+          .col-md-3.col-sm-4.uv-sidebar
+            .uv-widget.uv-course-widget
+              .widget-title
+                h4 Course Categories
+                |                                 
+                hr
+              |                             
+              .uv-course-category
+                ul
+                  li
+                    a(href="/courseSearch/Basic")
+                      i.fa.fa-android
+                      | Basic
+                    |                                         
+                    a(href="/courseSearch/Intermediate")
+                      i.fa.fa-html5
+                      |  Intermediate
+                    |                                         
+                    a(href="/courseSearch/Advanced")
+                      i.fa.fa-css3
+                      |  Advanced
+                    |                                         
+                    a(href="/courseSearch")
+                      i.fa.fa-codepen
+                      |  Programming Playground
+                    |                     
+            |                         
+            .uv-widget.uv-course-widget
+              .widget-title
+                h4 Teachers
+                |                                 
+                hr
+              |                             
+              .uv-course-instructor.padding-side
+                ul
+                  li
+                    a(href="")
+                      h4 Adrian C. Wick 
+                    |                                         
+                    span PHP Developer
+                  |                                     
+                  li
+                    a(href="")
+                      h4 Adrian C. Wick 
+                    |                                         
+                    span PHP Developer
+                  |                                     
+                  li
+                    a(href="")
+                      h4 Adrian C. Wick 
+                    |                                         
+                    span PHP Developer
+                  |                                     
+                  li
+                    a(href="")
+                      h4 Adrian C. Wick 
+                    |                                         
+                    span PHP Developer
+    |         
+    |         
+    //
+      |========================
+      |      Script
+      |========================
+    // jquery
+    script(src="/assets/plugins/js/jquery-1.11.3.min.js")
+    // Bootstrap
+    script(src="/assets/plugins/js/bootstrap.min.js")
+    // mean menu nav
+    script(src="/assets/plugins/js/meanmenu.js")
+    // ajaxchimp
+    script(src="/assets/plugins/js/jquery.ajaxchimp.min.js")
+    // wow
+    script(src="/assets/plugins/js/wow.min.js")
+    // Owl carousel
+    script(src="/assets/plugins/js/owl.carousel.js")
+    // dropdownhover
+    script(src="/assets/plugins/js/bootstrap-dropdownhover.min.js")
+    // jquery-ui.min
+    script(src="/assets/plugins/js/bars.js")
+    // validator
+    script(src="/assets/plugins/js/validator.min.js")
+    |         
+    

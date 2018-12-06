@@ -1,0 +1,175 @@
+doctype html
+//if IE 7
+  html.no-js.ie7.oldie(lang="en-US")  
+//if IE 8
+  html.no-js.ie8.oldie(lang="en-US")  
+// [if gt IE 8] <!
+html(lang="zxx")
+  head
+    // TITLE OF SITE
+    title DataDemy | Login & Registration 
+    // Meta
+    meta(charset="utf-8")
+    |         
+    meta(name="description", content="app landing page template")
+    |         
+    meta(name="keywords", content="app, landing page, bootstrap")
+    |         
+    meta(name="developer", content="")
+    |         
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1")
+    // FAV AND ICONS
+    link(rel="icon", href="/assets/images/favicon.png", sizes="32x32")
+    |         
+    link(rel="icon", href="/assets/images/apple-icon-192.png", sizes="192x192")
+    |         
+    link(rel="apple-touch-icon-precomposed", href="/assets/images/apple-icon-180.png")
+    // GOOGLE FONTS
+    link(href="//fonts.googleapis.com/css?family=Montserrat:300,400,500,700%7cVarela+Round", rel="stylesheet")
+    // FONT ICONS
+    link(rel="stylesheet", href="/assets/icons/font-awesome-4.7.0/css/font-awesome.min.css")
+    // Custom Icon Font
+    link(rel="stylesheet", href="/assets/font/flaticon.css")
+    // Bootstrap
+    link(rel="stylesheet", href="/assets/plugins/css/bootstrap.min.css")
+    // Animation
+    link(rel="stylesheet", href="/assets/plugins/css/animate.css")
+    // owl
+    link(rel="stylesheet", href="/assets/plugins/css/owl.css")
+    // selectize
+    link(rel="stylesheet", href="/assets/plugins/css/selectize.css")
+    |         
+    link(rel="stylesheet", href="/assets/plugins/css//selectize.bootstrap3.css")
+    // Fancybox
+    link(rel="stylesheet", href="/assets/plugins/css/jquery.fancybox.min.css")
+    // dropdown
+    link(rel="stylesheet", href="/assets/plugins/css/bootstrap-dropdownhover.min.css")
+    // mobile nav
+    link(rel="stylesheet", href="/assets/plugins/css/meanmenu.css")
+    // COUSTOM CSS link
+    link(rel="stylesheet", href="/assets/less/style.css")
+    |         
+    link(rel="stylesheet", href="/assets/less/responsive.css")
+    script(src="/assets/plugins/js/jquery-1.11.3.min.js")
+    //if lt IE 9
+      script(src="js/plagin-js/html5shiv.js")
+      |             
+      script(src="js/plagin-js/respond.min.js")
+  |  
+  //
+    |========================
+    |      Login and regester form
+    |========================     
+  body.login-reg-page
+    .uv-login-reg-form
+      .container
+        .row
+          .col-sm-6.col-xs-12.uv-login-reg-from-inner
+            .login-logo(align = "center")
+              h3 DataDemy
+            |                         
+            .uv-login-reg.shadow-1
+              // Nav tabs
+              .login-reg-nav
+                ul#myTabs.nav.nav-tabs(role="tablist")
+                  li.active(role="presentation")
+                    a(href="#home", aria-controls="home", role="tab", data-toggle="tab") Login
+                  |                                     
+                  li(role="presentation")
+                    a(href="#profile", aria-controls="profile", role="tab", data-toggle="tab") Register
+                |                                 
+                hr
+              // Tab panes
+              != messages('message', locals)
+              .tab-content
+                #home.tab-pane.active(role="tabpanel")
+                  form#login-form.uv-login-form(method='POST', action='/login')
+                    .form-group
+                      input(id="referrer", hidden, name="referrer")
+                    |      
+                    .form-group
+                      input#username.form-control(type="text", name="username", tabindex="1", placeholder="Username", value="")
+                    |                                     
+                    .form-group
+                      input#login-password.form-control(type="password", name="password", tabindex="2", placeholder="Password")
+                    |                                     
+                    .form-group.text-center
+                      input#remember(type="checkbox", tabindex="3", name="remember")
+                      |                                         
+                      label(for="remember")  Remember Me
+                    |                                     
+                    .form-group
+                      .row
+                        .col-sm-12
+                          button.form-control.btn.btn-fill(type="submit") Login Account
+                    |                                     
+                    .form-group
+                      .row
+                        .col-lg-12
+                          .text-center
+                            a.forgot-password(href="#", tabindex="5") Forgot Password?
+                |                             
+                #profile.tab-pane(role="tabpanel")
+                  form#register-form.uv-reg-form(method='POST', action='/register')
+                    .form-group
+                      input#reg-username.form-control(type="text", name="username", tabindex="1", placeholder="Username", value="")
+                    |                                     
+                    .form-group
+                      input#email.form-control(type="email", name="email", tabindex="1", placeholder="Email Address", value="")
+                    |                                     
+                    .form-group
+                      input#reg-password.form-control(type="password", name="password", tabindex="2", placeholder="Password")
+                    |                                     
+                    .form-group
+                      input#confirm-password.form-control(type="password", name='passwordConf', tabindex="2", placeholder="Confirm Password")
+                    |                                     
+                    .form-group
+                      .row
+                        .col-sm-12
+                          button.form-control.btn.btn-fill(type="submit") Register an Account
+    script.
+      $(function(){
+        console.log(document.referrer);
+        $('#referrer').val(document.referrer);
+      });
+      
+    //
+      |========================
+      |      Script
+      |========================
+    // jquery
+    script(src="/assets/plugins/js/jquery-1.11.3.min.js")
+    // Bootstrap
+    script(src="/assets/plugins/js/bootstrap.min.js")
+    // mean menu nav
+    script(src="/assets/plugins/js/meanmenu.js")
+    // ajaxchimp
+    script(src="/assets/plugins/js/jquery.ajaxchimp.min.js")
+    // wow
+    script(src="/assets/plugins/js/wow.min.js")
+    // Owl carousel
+    script(src="/assets/plugins/js/owl.carousel.js")
+    // dropdownhover
+    script(src="/assets/plugins/js/bootstrap-dropdownhover.min.js")
+    // jquery-ui.min
+    script(src="/assets/plugins/js/bars.js")
+    // validator
+    script(src="/assets/plugins/js/validator.min.js")
+    // smooth scroll
+    script(src="/assets/plugins/js/smooth-scroll.js")
+    // Fancybox js
+    script(src="/assets/plugins/js/jquery.fancybox.min.js")
+    // fitvids
+    script(src="/assets/plugins/js/jquery.fitvids.js")
+    // SELECTIZE
+    script(src="/assets/plugins/js/standalone/selectize.js")
+    // isotope js
+    script(src="/assets/plugins/js/isotope.pkgd.js")
+    |         
+    script(src="/assets/plugins/js/packery-mode.pkgd.js")
+    |         
+    script(src="/assets/plugins/js/jquery.inview.min.js")
+    |         
+    script(src="/assets/plugins/js/progressbar.min.js")
+    // init
+    script(src="/assets/js/init.js")

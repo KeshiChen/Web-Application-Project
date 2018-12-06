@@ -1,0 +1,115 @@
+extends layout
+block content
+    |         
+    section.uv-subpage-heading.image-bg(style="background-image: url(/assets/images/sub-banner.jpg);")
+      .overlay
+        .container
+          .row
+            .uv-subhead-content.col-xs-12
+              h2 My Profile 
+              |                             
+              span Welcome to DataDemy
+    |         
+    .uv-pagination
+      .container
+        ul
+          li.active
+            a(href="") Home
+          |                     
+          li
+            a(href="") Profile
+    |         
+    | 
+    //
+      |========================
+      |     Profile sidebar
+      |========================  
+    
+
+    section.uv-profile
+      .container
+        .row.section-separator
+          .col-sm-4.uv-sidebar.uv-student-profile-sidebar
+            .uv-widget
+              .uv-student-avatar
+                figure
+                  img(src=user.portrait, alt="")
+              |                             
+              .uv-student-info
+                h5 #{user.username}
+                |                                 
+            |                         
+            |                         
+            .uv-widget.no-side-padding
+              .uv-student-nav
+                ul
+                  li.active
+                    a(href='/profile/'+user.username)
+                      i.fa.fa-user-circle-o.gt-color
+                      | My Profile                                   
+                  li
+                    a(href='/articles/userartic')
+                      i.fa.fa-bookmark
+                      | My Posts                                   
+                  li
+                    a(href='/profile_datasets/'+user.username)
+                      i.fa.fa-calendar
+                      | My datasets                                
+                  li
+                    a(href="/leaderboard")
+                      i.fa.fa-industry
+                      | LeaderBoard                         
+                  li
+                    a(href='/profile_setting/'+user.username)
+                      i.fa.fa-gears
+                      | Profile Setting
+                                 
+                  li
+                    a(href="/logout")
+                      i.fa.fa-sign-out
+                      | Logout
+
+            
+          |    
+          //
+            |========================
+            |     List all my posts
+            |========================                   
+          .col-sm-8
+            .uv-sudent-profile-info                          
+              .uv-student-courses-overview
+                h3 My Posts
+                |                                 
+                ul
+                 each article, i in articles
+                      
+                  if user.username == article.author
+                    li 
+                      .row
+                        //- .col-sm-4
+                        //-   .course-feature-img
+                        //-     img.img-responsive(src=course.image, alt="")
+                        //- |                                        
+                        .col-sm-12
+                          .uv-std-course-info
+                            a(href="/articles/" + article._id, title="")   
+                              h3(style="text-align: center; position: relative; top: -12px")  #{article.title}
+                            | 
+                            .post-meta(style = "text-align: center;")                            
+                              span
+                                i.fa.fa-tag
+                                |                                         
+                                a(href="#") #{article.com_type}
+                              |                                     
+                              span
+                                i.fa.fa-comments
+                                |                                         
+                                a(href="#") #{article.reply_count} comments
+                              |                                     
+                              span
+                                i.fa.fa-eye
+                                |                                         
+                                a(href="#") #{article.popular} Views
+
+    |         
+    |         

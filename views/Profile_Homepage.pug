@@ -1,0 +1,144 @@
+
+extends layout
+block content
+    |         
+    section.uv-subpage-heading.image-bg(style="background-image: url(/assets/images/sub-banner.jpg);")
+      .overlay
+        .container
+          .row
+            .uv-subhead-content.col-xs-12
+              h2 My Profile 
+              |                             
+              span Welcome to Datademy
+    |         
+    .uv-pagination
+      .container
+        ul
+          li.active
+            a(href="") Home
+          |                     
+          li
+            a(href="") Profile
+    |         
+    | 
+    
+    //
+      |========================
+      |      Profile  sidebar
+      |========================  
+    section.uv-profile
+      .container
+        .row.section-separator
+          .col-sm-4.uv-sidebar.uv-student-profile-sidebar
+            .uv-widget
+              .uv-student-avatar
+                figure
+                  img(src=user.portrait, alt="")
+              |                             
+              .uv-student-info
+                h5 #{user.username}
+                |                                 
+            |                         
+            |                         
+            .uv-widget.no-side-padding
+              .uv-student-nav
+                ul
+                  li.active
+                    a(href='/profile/'+user.username)
+                      i.fa.fa-user-circle-o.gt-color
+                      | My Profile                                   
+                  li
+                    a(href='/articles/userartic')
+                      i.fa.fa-bookmark
+                      | My Posts                                   
+                  li
+                    a(href='/profile_datasets/'+user.username)
+                      i.fa.fa-calendar
+                      | My datasets                                
+                  li
+                    a(href="/leaderboard")
+                      i.fa.fa-industry
+                      | LeaderBoard                         
+                  li
+                    a(href='/profile_setting/'+user.username)
+                      i.fa.fa-gears
+                      | Profile Setting
+                                 
+                  li
+                    a(href="/logout")
+                      i.fa.fa-sign-out
+                      | Logout
+
+            
+          |  
+          //
+            |========================
+            |     User datail
+            |========================                     
+          .col-sm-8
+            .uv-sudent-profile-info
+              .uv-student-profile-details-header
+                .col-md-4.col-sm-12
+                  .uv-student-img
+                    img.img-responsive(src=user.portrait, alt="")
+                |                                 
+                .col-md-8.col-sm-12
+                  .uv-student-profile-inner
+                    ul
+                      li
+                        span Name:
+                        |                                                 
+                        p #{user.username}
+                      |                                                                                       
+                      li
+                        span Email Address:
+                        |                                                 
+                        p #{user.email}
+                      |      
+                      li
+                        span Score:
+                        |                                                 
+                        p #{user.rewardpoints*100}                                       
+              |                             
+              |   
+              //
+                |========================
+                |     list all the courses the user choose
+                |========================                            
+              .uv-student-courses-overview
+                h3 COURSES
+                |                                 
+                ul
+                  each course, i in courses
+                    li
+                      .row
+                        .col-sm-4
+                          .course-feature-img
+                            img.img-responsive(src=course.image, alt="")
+                        |                                         
+                        .col-sm-8
+                          .uv-std-course-info
+                            a(href="/courses/"+course.coursename)
+                              h6 #{course.coursename}
+                            |                                                 
+                            .uv-std-course-review
+                              ul
+                                li
+                                  i.fa.fa-star
+                                |                                                         
+                                li
+                                  i.fa.fa-star
+                                |                                                         
+                                li
+                                  i.fa.fa-star
+                                |                                                         
+                                li
+                                  i.fa.fa-star
+                                |                                                         
+                                li
+                                  i.fa.fa-star
+                              |                                                     
+                              span View Course
+                            |                                                 
+                            p
+                              | #{course.description}

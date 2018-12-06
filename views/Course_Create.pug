@@ -1,0 +1,87 @@
+extends layout
+
+block content
+  //
+    |========================
+    |    Creat course form
+    |========================    
+  .container
+    .row
+      .col-3
+      .col-6(style="width:50%;margin: auto")
+        h3 Course Editor
+        br
+        br
+        form(method="post", action="/courses").well(style="background-color: #fff")
+          .form-group
+            label Course Name:
+            input.form-control(name="coursename", type="text")
+          .form-group
+            label Reference:
+            input.form-control(name="reference", type="text")
+            //textarea.form-control(name="body")= article.body
+          .form-group
+            label Description:
+            input.form-control(name="description", type="text")
+          .form-group
+            label Image URL:
+            input.form-control(name="image", type="text")
+          .form-group
+            label Level:
+            br
+            input(type='radio', name='level', value='Basic', checked='')
+            |  Basic
+            br
+            input(type='radio', name='level', value='Intermediate')
+            |  Intermediate
+            br
+            input(type='radio', name='level', value='Advanced')
+            |  Advanced
+            br
+          input.btn.btn-primary(type="submit", value="Submit")
+        br
+        h3 Page Editor
+        br
+        .well(style="background-color: #fff")
+          form(method="post", action="/pages")
+            .form-group
+              label Course Name:
+              input.form-control(name="coursename", type="text")
+            .form-group
+              label Index (starts with 1):
+              input.form-control(name="index", type="number")
+              //textarea.form-control(name="body")= article.body
+            .form-group
+              label Page Type:
+              input(type='radio', name='pagetype', value='lecture', checked='')
+              |  Lecture
+              br
+              input(type='radio', name='pagetype', value='fillBlank')
+              |  Filling blank
+              br
+              input(type='radio', name='pagetype', value='MCQ')
+              |  Multi-choice questions
+            .form-group
+              label Title:
+              input.form-control(name="title", type="text")
+            .form-group
+              label Content:
+              br
+              textarea.form-control(name="content")
+            .form-group
+              label Image:
+              input.form-control(name="image", type="text")
+            .form-group
+              label MCQ Settings (if any):
+              br
+              label MCQ options (seperated by ","s):
+              input.form-control(name="options", type="text")
+              label Blank filling question:
+              input.form-control(name="question", type="text")
+              label Solution (the correct option)
+              input.form-control(name="solution", type="text")
+              label Units of reward points
+              input.form-control(name="reward", type="number")
+              br
+            input.btn.btn-primary(type="submit", value="Submit")
+      .col-3
